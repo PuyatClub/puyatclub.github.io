@@ -1,0 +1,303 @@
+/* styles.css */
+
+:root {
+  --bg-color: #121212;
+  --text-color: #fefae0;
+  --btn-bg: #444;
+  --btn-hover: #666;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  height: 100%;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+/* Perspective Camera Wrap */
+.camera-wrap, .start-screen {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  transition: transform 0.2s ease-out;
+  transform-origin: center;
+  will-change: transform;
+}
+
+/* Start Screen */
+.start-screen {
+  position: fixed;
+  z-index: 999;
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.start-title {
+  font-size: 5rem;
+  letter-spacing: 6px;
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 2rem;
+  text-shadow: 0 0 3px #fff;
+  color: #fffbe6;
+}
+
+#startBtn {
+  background: none;
+  border: none;
+  color: #fffbe6;
+  font-size: 1.2rem;
+  font-family: monospace;
+  cursor: pointer;
+  padding: 0.5rem 1.5rem;
+  border: 2px dashed #fffbe6;
+  transition: transform 0.2s ease, opacity 0.2s, background-color 0.2s, color 0.2s;
+}
+
+#startBtn:hover {
+  transform: scale(1.05);
+  opacity: 0.85;
+  background-color: #fffbe6;
+  color: #121212;
+}
+
+.footer {
+  margin-top: 2rem;
+  font-size: 0.75rem;
+  opacity: 0.8;
+  font-family: monospace;
+  color: #fffbe6;
+}
+
+.video-intro {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hidden {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 1.5s ease;
+}
+
+.landing {
+  text-align: center;
+  padding: 2rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 1.5s ease;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  margin-top: 1rem;
+  margin-bottom: 3rem;
+  text-transform: uppercase;
+  color: #fffbe6;
+}
+
+.title {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.5rem;
+  letter-spacing: 6px;
+  margin-bottom: 0.5rem;
+  color: #fffbe6;
+  text-shadow: 0 0 2px #fff;
+}
+
+.tagline {
+  font-size: 1.2rem;
+  opacity: 1;
+  color: #fcefc2;
+  text-shadow: 0 0 2px #fff;
+}
+
+.collage {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-top: 4rem;
+  flex-wrap: wrap;
+}
+
+.frame {
+  background-color: #555;
+  padding: 1rem;
+  transform: rotate(-2deg);
+  box-shadow: 0 4px 7px rgba(255,255,255,0.18);
+  transition: transform 0.3s ease;
+  animation: floatMotion 8s ease-in-out infinite alternate;
+}
+
+@keyframes floatMotion {
+  0% { transform: translate(0px, 0px) rotate(-2deg); }
+  50% { transform: translate(12px, -10px) rotate(2deg); }
+  100% { transform: translate(-10px, 8px) rotate(-1.5deg); }
+}
+
+.frame:hover {
+  transform: rotate(0deg) scale(1.02);
+}
+
+.jagged {
+  width: 300px;
+  height: auto;
+  object-fit: cover;
+  clip-path: polygon(
+    5% 0%, 95% 5%, 100% 25%, 95% 45%,
+    100% 70%, 95% 90%, 75% 95%, 55% 100%,
+    35% 95%, 15% 90%, 0% 75%, 5% 55%,
+    0% 30%, 5% 10%
+  );
+}
+
+.mute-button {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  background-color: var(--btn-bg);
+  color: var(--text-color);
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  z-index: 100;
+  transition: background-color 0.3s;
+}
+
+.mute-button:hover {
+  background-color: var(--btn-hover);
+}
+
+/* Scanline + Flicker + Grain + Chromatic Aberration */
+body.scanlines::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  background: 
+    repeating-linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.12),
+      rgba(255, 255, 255, 0.12) 1px,
+      transparent 1px,
+      transparent 3px
+    ),
+    url('https://grainy-gradients.vercel.app/noise.png');
+  mix-blend-mode: overlay;
+  animation: randomFlicker 10s infinite;
+}
+
+@keyframes randomFlicker {
+  0% { opacity: 0.95; }
+  10% { opacity: 0.88; }
+  23% { opacity: 0.92; }
+  33% { opacity: 1; }
+  48% { opacity: 0.85; }
+  59% { opacity: 0.93; }
+  67% { opacity: 0.91; }
+  76% { opacity: 0.98; }
+  85% { opacity: 0.89; }
+  100% { opacity: 0.95; }
+}
+
+body.scanlines {
+  filter: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='chromatic'><feColorMatrix type='matrix' values='1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0.005 -0.005 0 1 0'/></filter></svg>#chromatic");
+}
+
+/* Lightbox fullscreen view */
+.art-lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+  cursor: zoom-out;
+  backdrop-filter: blur(5px);
+  animation: fadeInBg 0.4s ease-out forwards;
+}
+
+.art-lightbox img {
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: contain;
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+  transform: translateY(100vh);
+  animation: slideUpImage 0.5s ease-out forwards;
+  animation-delay: 0.1s;
+  opacity: 0;
+}
+
+.art-lightbox .close-btn {
+  position: absolute;
+  top: 1.5rem;
+  right: 2rem;
+  font-size: 3.5rem;
+  color: #fff;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 100000;
+  transition: text-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.art-lightbox .close-btn:hover {
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.95);
+  transform: rotate(10deg) scale(1.1);
+}
+
+@keyframes fadeInBg {
+  from {
+    background: rgba(0, 0, 0, 0);
+  }
+  to {
+    background: rgba(0, 0, 0, 0.95);
+  }
+}
+
+@keyframes slideUpImage {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

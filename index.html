@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PUYAT CLUB</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter&display=swap" rel="stylesheet">
+</head>
+<body class="scanlines">
+
+  <!-- Start Screen -->
+  <div class="start-screen camera-wrap">
+    <h1 class="start-title">PUYAT CLUB</h1>
+    <button id="startBtn">› PRESS START</button>
+    <p class="footer">© 2025 PUYAT CLUB</p>
+  </div>
+
+  <!-- Intro Video -->
+  <div class="video-intro hidden">
+    <video id="introVideo" playsinline muted>
+      <source src="intro.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+  <!-- Background Music -->
+  <audio id="bgMusic" src="music.mp3" loop preload="auto"></audio>
+
+  <!-- Docking Page -->
+  <div class="landing hidden camera-wrap">
+    <nav>
+      <ul>
+        <li>Home</li>
+        <li>Artists</li>
+        <li>Archive</li>
+        <li>About</li>
+      </ul>
+    </nav>
+
+    <header>
+      <h1 class="title">PUYAT CLUB</h1>
+      <p class="tagline">A collective built by sleepless minds.</p>
+    </header>
+
+    <section class="collage">
+      <div class="frame"><img src="art1.webp" alt="Art 1" class="jagged art-image"></div>
+      <div class="frame"><img src="art2.webp" alt="Art 2" class="jagged art-image"></div>
+      <div class="frame"><img src="art3.webp" alt="Art 3" class="jagged art-image"></div>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
